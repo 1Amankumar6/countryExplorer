@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countries Information</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <h1>Country Explorer</h1>
+    <div>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#help">Help</a>
+    </div>
+</nav>
+
+<header>
+    <input type="text" id="search" placeholder="Search for a country..." />
+    <select id="sort">
+        <option value="default">Sort by Size</option>
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+    </select>
+</header>
+
+<main id="countries-container"></main>
+
+<!-- Modal for Country Details -->
+<div id="country-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2 id="modal-country-name"></h2>
+        <img
+            id="modal-country-flag"
+            src=""
+            alt=""
+            style="width: auto; height: auto; max-width: 100%"
+        />
+        <p><strong>Population:</strong> <span id="modal-country-population"></span></p>
+        <p><strong>Area:</strong> <span id="modal-country-area"></span> km²</p>
+        <p><strong>Languages:</strong> <span id="modal-country-languages"></span></p>
+        <p><strong>Description:</strong> <span id="modal-country-description"></span></p>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<footer>
+    <p>&copy;2024 Countries Information. All Rights Reserved.</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

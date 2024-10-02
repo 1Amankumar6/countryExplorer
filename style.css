@@ -1,0 +1,218 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap");
+:root {
+  --primary-color: #3aafa9;
+  --secondary-color: #f7fff7;
+  --accent-color: #ff6f61;
+  --text-color: #17252a;
+  --background-color: #def2f1;
+  --navbar-bg-color: #2b7a78;
+  --card-bg-color: #feffff;
+  --footer-bg-color: #17252a;
+  --box-shadow-color: rgba(0, 0, 0, 0.1);
+  --hover-bg-color: #fae3d9;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: var(--text-color);
+}
+
+body::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--secondary-color);
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--navbar-bg-color);
+  padding: 10px 20px;
+}
+
+nav h1 {
+  font-family: "Dancing Script", cursive;
+  font-size: 24px;
+  color: #ffffff;
+  margin: 0;
+  font-weight: bold;
+}
+
+nav a {
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+nav a:hover {
+  background-color: var(--hover-bg-color);
+  color: #17252a;
+  border-radius: 5px;
+}
+
+#search {
+  margin-top: 10px;
+  padding: 10px;
+  width: 80%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+}
+
+#sort {
+  padding: 10px;
+  margin-left: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+}
+
+#countries-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  flex: 1;
+  gap: 20px;
+}
+
+.country-card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  width: calc(100% / 3 - 40px);
+  max-width: 300px;
+  max-height: 250px;
+  box-shadow: 0 4px 10px var(--box-shadow-color);
+  background-color: var(--card-bg-color);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  text-align: center; /* Centering the content */
+}
+
+.country-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  background-color: var(--footer-bg-color);
+  color: white;
+  margin: 5% auto;
+  scale: 0.9;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  animation: fadeIn 0.3s;
+}
+
+.modal::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: var(--accent-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+footer {
+  background-color: var(--footer-bg-color);
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .country-card {
+    width: calc(100% / 2 - 40px);
+  }
+  nav {
+    flex-direction: column;
+  }
+  nav h1 {
+    margin-bottom: 10px;
+  }
+  nav a {
+    padding: 8px;
+    margin: 5px 0;
+  }
+  #search {
+    width: calc(100% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .country-card {
+    width: calc(100% - 20px);
+  }
+  header {
+    padding: 15px;
+  }
+  #sort {
+    margin-left: 5px;
+  }
+}
