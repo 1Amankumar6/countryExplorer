@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap");
+
 :root {
   --primary-color: #3aafa9;
   --secondary-color: #f7fff7;
@@ -6,7 +7,8 @@
   --text-color: #17252a;
   --background-color: #def2f1;
   --navbar-bg-color: #2b7a78;
-  --card-bg-color: #feffff;
+  --card-bg-color: #feffff; /* Light color for card */
+  --card-data-bg-color: #e2e2e2; /* Soft background for card data */
   --footer-bg-color: #17252a;
   --box-shadow-color: rgba(0, 0, 0, 0.1);
   --hover-bg-color: #fae3d9;
@@ -113,14 +115,31 @@ nav a:hover {
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 15px;
-  width: calc(100% / 3 - 40px);
+  width: calc(33.33% - 40px);
   max-width: 300px;
   max-height: 250px;
   box-shadow: 0 4px 10px var(--box-shadow-color);
   background-color: var(--card-bg-color);
   transition: transform 0.3s, box-shadow 0.3s;
   position: relative;
-  text-align: center; /* Centering the content */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.card-data {
+  margin-top: 10px;
+  background-color: var(--card-data-bg-color); /* Updated background color */
+  color: var(--text-color); /* Match text color */
+  border-radius: 10px;
+  padding: 10px 20px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 90%;
 }
 
 .country-card:hover {
@@ -209,10 +228,25 @@ footer {
   .country-card {
     width: calc(100% - 20px);
   }
+  nav {
+    padding: 20px;
+  }
+  nav h1 {
+    font-size: 40px;
+  }
+  #nav_data {
+    display: none;
+  }
   header {
     padding: 15px;
+    display: flex;
+    align-items: center;
+  }
+  header input {
+    height: 40px;
   }
   #sort {
+    margin-top: 9px;
     margin-left: 5px;
   }
 }
