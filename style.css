@@ -7,8 +7,8 @@
   --text-color: #17252a;
   --background-color: #def2f1;
   --navbar-bg-color: #2b7a78;
-  --card-bg-color: #feffff; /* Light color for card */
-  --card-data-bg-color: #e2e2e2; /* Soft background for card data */
+  --card-bg-color: #feffff;
+  --card-data-bg-color: #e2e2e2;
   --footer-bg-color: #17252a;
   --box-shadow-color: rgba(0, 0, 0, 0.1);
   --hover-bg-color: #fae3d9;
@@ -51,7 +51,7 @@ body::-webkit-scrollbar-thumb:hover {
 header {
   background-color: var(--primary-color);
   color: white;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
 }
 
@@ -60,12 +60,12 @@ nav {
   justify-content: space-between;
   align-items: center;
   background-color: var(--navbar-bg-color);
-  padding: 10px 20px;
+  padding: 7px 20px;
 }
 
-nav h1 {
+#logo {
   font-family: "Dancing Script", cursive;
-  font-size: 24px;
+  font-size: 25px;
   color: #ffffff;
   margin: 0;
   font-weight: bold;
@@ -91,15 +91,13 @@ nav a:hover {
   max-width: 400px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: white;
 }
 
-#sort {
-  padding: 10px;
-  margin-left: 10px;
+#findContinent {
+  padding: 8px;
+  border-radius: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: white;
+  cursor: pointer;
 }
 
 #countries-container {
@@ -117,29 +115,24 @@ nav a:hover {
   padding: 15px;
   width: calc(33.33% - 40px);
   max-width: 300px;
-  max-height: 250px;
   box-shadow: 0 4px 10px var(--box-shadow-color);
   background-color: var(--card-bg-color);
   transition: transform 0.3s, box-shadow 0.3s;
-  position: relative;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: auto;
 }
 
 .card-data {
   margin-top: 10px;
-  background-color: var(--card-data-bg-color); /* Updated background color */
-  color: var(--text-color); /* Match text color */
+  background-color: var(--card-data-bg-color);
+  color: var(--text-color);
   border-radius: 10px;
   padding: 10px 20px;
-  text-align: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   width: 100%;
-  max-width: 90%;
 }
 
 .country-card:hover {
@@ -148,7 +141,6 @@ nav a:hover {
 }
 
 .modal {
-  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -159,29 +151,29 @@ nav a:hover {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.modal-content {
-  background-color: var(--footer-bg-color);
-  color: white;
-  margin: 5% auto;
-  scale: 0.9;
-  padding: 20px;
-  border-radius: 10px;
-  width: 80%;
-  max-width: 600px;
-  animation: fadeIn 0.3s;
-}
-
 .modal::-webkit-scrollbar {
   display: none;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.modal-content {
+  background-color: var(--footer-bg-color);
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 5% auto;
+  width: 80%;
+  animation: fadeIn 0.3s;
+}
+
+#modal-country-flag {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
+
+#modal-country-language a{
+  color: lightskyblue;
 }
 
 .close-button {
@@ -194,7 +186,6 @@ nav a:hover {
 .close-button:hover,
 .close-button:focus {
   color: var(--accent-color);
-  text-decoration: none;
   cursor: pointer;
 }
 
@@ -209,18 +200,20 @@ footer {
   .country-card {
     width: calc(100% / 2 - 40px);
   }
-  nav {
-    flex-direction: column;
+  #logo {
+    font-size: 35px;
   }
-  nav h1 {
-    margin-bottom: 10px;
+  #nav_data {
+    display: none;
   }
-  nav a {
-    padding: 8px;
-    margin: 5px 0;
+  #findContinent {
+    margin-top: 10px;
   }
   #search {
     width: calc(100% - 20px);
+  }
+  nav {
+    flex-direction: column;
   }
 }
 
@@ -228,25 +221,28 @@ footer {
   .country-card {
     width: calc(100% - 20px);
   }
-  nav {
-    padding: 20px;
-  }
-  nav h1 {
-    font-size: 40px;
+  #logo {
+    font-size: 35px;
   }
   #nav_data {
     display: none;
   }
+  #findContinent {
+    margin-top: 10px;
+  }
   header {
-    padding: 15px;
+    padding: 10px;
     display: flex;
+    flex-direction: column;
     align-items: center;
   }
-  header input {
-    height: 40px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  #sort {
-    margin-top: 9px;
-    margin-left: 5px;
+  to {
+    opacity: 1;
   }
 }
