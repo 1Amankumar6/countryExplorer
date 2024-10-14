@@ -1,109 +1,111 @@
-const countriesAPI = "https://restcountries.com/v2/all";
+const countriesAPI = "https://restcountries.com/v3.1/all";
+
 const countriesContainer = document.getElementById("countries-container");
+const modal = document.getElementById("modal");
+const closeModalButton = document.getElementById("close-modal-button");
 const searchInput = document.getElementById("search");
-const sortSelect = document.getElementById("sort");
-const modal = document.getElementById("country-modal");
-const closeModalButton = document.querySelector(".close-button");
+const logoTap = document.getElementById("logo");
+const findContinent = document.getElementById("findContinent");
 
 let countries = [];
 
-// Fetch countries data
 async function fetchCountries() {
-  const response = await fetch(countriesAPI);
-  countries = await response.json();
-  displayCountries(countries);
+  try {
+    const response = await fetch(countriesAPI);
+    if (!response.ok) throw new Error("Network response was not ok");
+    countries = await response.json();
+    displayCountries(countries);
+  } catch (error) {
+    console.error("Failed to fetch countries:", error);
+  }
 }
 
-// Display countries in the DOM
 function displayCountries(countries) {
   countriesContainer.innerHTML = "";
   countries.forEach((country) => {
     const countryCard = document.createElement("div");
     countryCard.classList.add("country-card");
     countryCard.innerHTML = `
-                    <img id="flag-container" src="${country.flags.svg}" alt="${
-      country.name
+          <img id="flag-container" src="${country.flags.svg}" alt="${
+      country.name.common
     } flag" width="100">
-                    <div class ="card-data">
-                    <h3>${country.name}</h3>
-                    <p>Population: ${country.population.toLocaleString()}</p>
-                    <p>Area: ${country.area.toLocaleString()} km²</p>
-                    <p style="color: #555;">${
-                      country.capital
-                        ? `Capital: ${country.capital}`
-                        : "Capital: N/A"
-                    }</p>
-                    </div>
-                `;
+          <div class="card-data">
+            <h3>${country.name.common}</h3>
+            <p>Population: ${country.population.toLocaleString()}</p>
+            <p>Area: ${
+              country.area ? country.area.toLocaleString() : "N/A"
+            } km²</p>
+            <p style="color: #555;">Capital: ${
+              country.capital ? country.capital[0] : "N/A"
+            }</p>
+          </div>
+        `;
 
-    // Add click event to show details
     countryCard.addEventListener("click", () => showCountryDetails(country));
     countriesContainer.appendChild(countryCard);
   });
 }
 
-// Show country details in modal
 function showCountryDetails(country) {
-  document.getElementById("modal-country-name").innerText = country.name;
+  document.getElementById("modal-country-name").innerText =
+    country.name.official;
   document.getElementById("modal-country-flag").src = country.flags.svg;
+
   document.getElementById("modal-country-population").innerText =
     country.population.toLocaleString();
+
   document.getElementById("modal-country-area").innerText =
     country.area.toLocaleString();
 
-  // Extract languages
-  const languages = country.languages.map((lang) => lang.name).join(", ");
-  document.getElementById("modal-country-languages").innerText =
-    languages || "N/A";
+  const googleMapsLink = country.maps.googleMaps || "Link not available";
+  
+  document.getElementById("modal-country-language").innerHTML = `
+    <a href="${googleMapsLink}" target="_blank" style="text-decoration: none;">${googleMapsLink}</a>
+  `;
 
-  // Description with additional facts
-  const description = `The capital of ${country.name} is ${
+  const description = `The capital of ${country.name.common} is ${
     country.capital || "N/A"
-  }. 
-            ${
-              country.name
-            } is known for its stunning landscapes, rich culture, and diverse wildlife.`;
+  }. ${
+    country.name.common
+  } is known for its stunning landscapes, rich culture, and diverse wildlife.`;
   document.getElementById("modal-country-description").innerText = description;
 
-  // Show modal
   modal.style.display = "block";
 }
 
-// Close modal
 closeModalButton.addEventListener("click", () => {
   modal.style.display = "none";
 });
 
-// Close modal when clicking outside of it
-window.addEventListener("click", (event) => {
+window.onclick = (event) => {
   if (event.target === modal) {
     modal.style.display = "none";
   }
-});
+};
 
-// Search functionality
-searchInput.addEventListener("input", () => {
-  const searchTerm = searchInput.value.toLowerCase();
+searchInput.addEventListener("input", (event) => {
+  const query = event.target.value.toLowerCase();
   const filteredCountries = countries.filter((country) =>
-    country.name.toLowerCase().includes(searchTerm)
+    country.name.common.toLowerCase().includes(query)
   );
   displayCountries(filteredCountries);
 });
 
-// Sort functionality
-sortSelect.addEventListener("change", () => {
-  let sortedCountries;
-
-  if (sortSelect.value === "asc") {
-    sortedCountries = [...countries].sort((a, b) => a.area - b.area);
-  } else if (sortSelect.value === "desc") {
-    sortedCountries = [...countries].sort((a, b) => b.area - a.area);
-  } else {
-    sortedCountries = countries; // Default order
-  }
-
-  displayCountries(sortedCountries);
+logoTap.addEventListener("click", () => {
+  searchInput.value = ""; // Clear the search input
+  displayCountries(countries); // Display all countries
 });
 
-// Initial fetch
+findContinent.addEventListener("change", () => {
+  let continent;
+  if (findContinent.value !== "default") {
+    continent = countries.filter((country) =>
+      country.continents.includes(findContinent.value)
+    );
+    displayCountries(continent);
+  } else {
+    displayCountries(countries); // Display all countries if default is selected
+  }
+});
+
 fetchCountries();
